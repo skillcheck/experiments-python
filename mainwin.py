@@ -18,6 +18,12 @@ def main():
     lineEdit = QLineEdit( cw )
     gl.addWidget( lineEdit, 0, 1 )
 
+    slider = QSlider( Qt.Horizontal, cw )
+    gl.addWidget( slider, 1, 0, 1, 2 )
+
+    slot = lambda value : lineEdit.setText( str(value) )
+    slider.valueChanged.connect( slot )
+
     mainwin.show();
     sys.exit(app.exec())
 
