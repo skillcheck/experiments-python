@@ -15,6 +15,9 @@ def main():
     label = QLabel("Hello World", cw, alignment=Qt.AlignCenter)
     gl.addWidget( label, 0, 0 )
 
+    lineEdit = QLineEdit( cw )
+    gl.addWidget( lineEdit, 0, 1 )
+
     mainwin.show();
     sys.exit(app.exec())
 
