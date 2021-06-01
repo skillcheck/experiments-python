@@ -1,4 +1,4 @@
-from averager_gui import Averager
+from cesium.averager_gui import Averager
 import sys
 from PySide6.QtWidgets import *
 

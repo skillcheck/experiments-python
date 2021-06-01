@@ -1,4 +1,4 @@
-from averager_math import *
+from cesium.averager_math import *
 from PySide6.QtCore import *
 from PySide6.QtWidgets import *
 
