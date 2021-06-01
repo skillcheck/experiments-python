@@ -1,6 +1,7 @@
-import sys
-from PySide6.QtCore import Qt
+from PySide6.QtCore import *
 from PySide6.QtWidgets import *
+from PySide6.QtUiTools import *
+import sys
 
 def main():
     app = QApplication(sys.argv)
@@ -28,6 +29,15 @@ def main():
     slider.valueChanged.connect(
         lambda value : lineEdit.setText(str(value))
     )
+
+    if ( len(sys.argv) > 1 ):
+        loader = QUiLoader()
+        uifile = QFile( sys.argv[1] )
+        uifile.open( QFile.ReadOnly )
+        ui = loader.load( uifile, cw )
+        gl.addWidget( ui, 2, 0, 1, 2 )
+        uifile.close()
+        ui.EuroSim_SimConfig_UserId_TextField.setText("1000")
 
     mainwin.show();
     sys.exit(app.exec())
