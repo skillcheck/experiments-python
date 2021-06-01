@@ -33,6 +33,12 @@ class Averager(QMainWindow):
         self.result.setReadOnly( True )
 
     def inputEdited(self):
-        values = self.sender().text().split(',')
-        self.result.setText(str(calculateAverage(values)))
-
+        try:
+            values = self.sender().text().split(',')
+            self.result.setText(str(calculateAverage(values)))
+        except ValueError as err:
+            self.result.setText("Invalid")
+            QMessageBox.warning(None, "Value Error", "Value Error: {0}".format(err))
+        except:
+            self.result.setText("Exception")
+            QMessageBox.warning(None, "Exception", "Exception: {0}".sys.exc_info()[0])
