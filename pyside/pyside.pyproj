@@ -13,7 +13,7 @@
     <RootNamespace>pyside</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>s:\dist\win32-vc16\openigs2\share\openigs\configs\eurosim\gui\simconfig.ui</CommandLineArguments>
+    <CommandLineArguments>simconfig.ui</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -25,8 +25,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="averager.py" />
     <Compile Include="mainwin.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="simconfig.ui" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

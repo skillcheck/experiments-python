@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "pyside", "pyside.pyproj", "{5F8304F3-49FD-45E5-8289-F478459030F2}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "averager", "averager\averager.pyproj", "{144433FE-DB2B-4070-8026-4535F6E16AB5}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "cesium", "averager\cesium\cesium.pyproj", "{ADA61D54-8832-47DE-A772-F25E6A3248F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,10 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F8304F3-49FD-45E5-8289-F478459030F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F8304F3-49FD-45E5-8289-F478459030F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{144433FE-DB2B-4070-8026-4535F6E16AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{144433FE-DB2B-4070-8026-4535F6E16AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA61D54-8832-47DE-A772-F25E6A3248F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA61D54-8832-47DE-A772-F25E6A3248F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
