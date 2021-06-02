@@ -8,22 +8,41 @@ def main():
 
     mainWin = QMainWindow()
 
+    # Create Menu
+    menuBar = QMenuBar(mainWin)
+    mainWin.setMenuBar(menuBar)
 
+    fileMenu = menuBar.addMenu("File")
+    newAction = fileMenu.addAction("New")
+    openAction = fileMenu.addAction("Open")
+    fileMenu.addSeparator()
+    saveAction = fileMenu.addAction("Save")
+    saveAsAction = fileMenu.addAction("Save As")
+    saveAllAction = fileMenu.addAction("Save All")
+    fileMenu.addSeparator()
+    closeAction = fileMenu.addAction("Close")
+    closeAllAction = fileMenu.addAction("Close All")
+    fileMenu.addSeparator()
+    exitAction = fileMenu.addAction("Exit")
+    exitAction.triggered.connect(lambda : exit())
 
     # Create Central Widgets
     cw = QWidget(mainWin)
     mainWin.setCentralWidget(cw)
 
-    gl = QGridLayout(cw)
+    layout = QGridLayout(cw)
+    row = 0
 
     label = QLabel("Hello World", cw, alignment=Qt.AlignCenter)
-    gl.addWidget(label, 0, 0)
+    layout.addWidget(label, row, 0)
 
     lineEdit = QLineEdit(cw)
-    gl.addWidget(lineEdit, 0, 1)
+    layout.addWidget(lineEdit, row, 1)
+    row += 1
 
     slider = QSlider(Qt.Horizontal, cw)
-    gl.addWidget(slider, 1, 0, 1, 2)
+    layout.addWidget(slider, row, 0, 1, 2)
+    row += 1
 
     # def slot( value ):
     #     lineEdit.setText( str(value) )
@@ -37,7 +56,7 @@ def main():
         uifile = QFile(sys.argv[1])
         uifile.open(QFile.ReadOnly)
         ui = loader.load(uifile, cw)
-        gl.addWidget(ui, 2, 0, 1, 2)
+        layout.addWidget(ui, row, 0, 1, 2)
         uifile.close()
         ui.EuroSim_SimConfig_UserId_TextField.setText("1000")
         ui.EuroSim_SimConfig_Close_Button.clicked.connect(lambda : exit())
