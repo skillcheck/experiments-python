@@ -1,7 +1,55 @@
-from PySide6.QtCore import *
+from PySide6.QtOpenGL import QOpenGLFunctions_1_3
+from PySide6.QtOpenGLWidgets import *
+from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from PySide6.QtUiTools import *
+from PySide6.QtCore import *
+
+from OpenGL.GL import *
+from OpenGL.GLU import *
+
 import sys
+
+class GLWidget(QOpenGLWidget):
+
+    def __init__(self, parent):
+        super(GLWidget, self).__init__(parent)
+
+    def minimumSizeHint(self):
+        return QSize(100, 300)
+
+    def sizeHint(self):
+        return QSize(400, 400)
+
+    def initializeGL(self):
+        super().initializeGL()
+        # Set up the rendering context, define display lists etc.:
+        glClearColor( 1.0, 0.0, 0.0, 1.0 )
+        glEnable(GL_DEPTH_TEST)
+
+    def resizeGL(self, w, h):
+        # setup viewport, projection etc.:
+        glViewport(0, 0, w, h)
+
+    def paintGL(self):
+        # draw the scene:
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glColor3f(1,0,0)
+        glRectf(-1,-1,1,0)
+        glColor3f(0,1,0)
+        glRectf(-1,0,1,1)
+        glBegin(GL_TRIANGLES)
+        glVertex2f(3.0, 3.0)
+        glVertex2f(5.0, 3.0)
+        glVertex2f(5.0, 5.0)
+        glVertex2f(6.0, 4.0)
+        glVertex2f(7.0, 4.0)
+        glVertex2f(7.0, 7.0)
+        glEnd()
+        glFinish()
+
 
 def main():
     app = QApplication(sys.argv)
@@ -42,6 +90,10 @@ def main():
 
     slider = QSlider(Qt.Horizontal, cw)
     layout.addWidget(slider, row, 0, 1, 2)
+    row += 1
+
+    glw = GLWidget(cw)
+    layout.addWidget(glw, row, 0, 1, 2)
     row += 1
 
     # def slot( value ):
