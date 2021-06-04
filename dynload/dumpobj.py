@@ -1,4 +1,4 @@
-import os.path, importlib
+import os, os.path, importlib
 import inspect
 import pkgutil
 
@@ -16,7 +16,7 @@ def dumpPkg(inputName, ind=''):
     contents = [name for _, name, _ in pkgutil.iter_modules([inputName])]
     
     if len(contents) > 0:
-        pprint(ind+'Contents: '+str(contents))
+        #pprint(ind+'Contents: '+str(contents))
         for item in contents:
             dumpImport(inputName + '.' + item, ind+'  ')
     else:
@@ -27,8 +27,8 @@ def dumpImport(inputName, ind = ''):
     pprint(ind+'dumpImport('+inputName+')')
     object = importlib.import_module(inputName)
 
-    #pprint(ind+'ismodule: '+str(inspect.ismodule(object)))
-    #pprint(ind+'isclass: '+str(inspect.isclass(object)))
+    pprint(ind+'ismodule: '+str(inspect.ismodule(object)))
+    pprint(ind+'isclass: '+str(inspect.isclass(object)))
 
     if inspect.ismodule(object):
         dumpPkg(inputName, ind+'  ')
