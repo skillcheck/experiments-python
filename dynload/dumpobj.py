@@ -5,33 +5,42 @@ import pkgutil
 from pprint import pprint
 import sys
 
-def dumpPkg(inputName, indent = ''):
-    print(indent, 'dumpPkg(', inputName,')')
+def dumpClasses(object, ind=''):
+    for name, obj in inspect.getmembers(object, inspect.isclass):
+        pprint(ind+'Class: '+name)
+
+
+def dumpPkg(inputName, ind=''):
+    pprint(ind+'dumpPkg('+inputName+')')
     pkgpath = os.path.dirname(inputName)
     contents = [name for _, name, _ in pkgutil.iter_modules([inputName])]
-    #print(indent + 'Contents:')
-    #pprint(contents)
     
-    for item in contents:
-        dumpImport(inputName + '.' + item, indent+'  ')
+    if len(contents) > 0:
+        pprint(ind+'Contents: '+str(contents))
+        for item in contents:
+            dumpImport(inputName + '.' + item, ind+'  ')
+    else:
+        object = importlib.import_module(inputName)
+        dumpClasses(object, ind+'  ')
 
-def dumpImport(inputName, indent = ''):
-    print(indent, 'dumpImport(', inputName,')')
+def dumpImport(inputName, ind = ''):
+    pprint(ind+'dumpImport('+inputName+')')
     object = importlib.import_module(inputName)
 
+    #pprint(ind+'ismodule: '+str(inspect.ismodule(object)))
+    #pprint(ind+'isclass: '+str(inspect.isclass(object)))
+
     if inspect.ismodule(object):
-        dumpPkg(inputName, indent)
+        dumpPkg(inputName, ind+'  ')
     elif inspect.isclass(object):
-        for name, obj in inspect.getmembers(object, inspect.isclass):
-            print(indent, 'Class: ', name)
+        dumpClasses(object, ind+'  ')
 
 def main():
 
     print('Print Object to load:')
     inputName = input()
-    
+
     dumpImport(inputName)
-     
-     
+
 if __name__ == "__main__":
     main()
