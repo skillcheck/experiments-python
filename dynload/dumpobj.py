@@ -9,7 +9,6 @@ def dumpClasses(object, ind=''):
     for name, obj in inspect.getmembers(object, inspect.isclass):
         pprint(ind+'Class: '+name)
 
-
 def dumpPkg(inputName, ind=''):
     pprint(ind+'dumpPkg('+inputName+')')
     pkgpath = os.path.dirname(inputName)
@@ -19,9 +18,16 @@ def dumpPkg(inputName, ind=''):
         #pprint(ind+'Contents: '+str(contents))
         for item in contents:
             dumpImport(inputName + '.' + item, ind+'  ')
+
+    elif os.path.isdir(inputName):
+        for subdir in os.listdir(inputName):
+            if os.path.isdir(inputName+'/'+subdir):
+                dumpImport(inputName+'.'+subdir, ind+'  ')
+
     else:
         object = importlib.import_module(inputName)
-        dumpClasses(object, ind+'  ')
+        pprint(dir(object), indent=len(ind))
+
 
 def dumpImport(inputName, ind = ''):
     pprint(ind+'dumpImport('+inputName+')')
