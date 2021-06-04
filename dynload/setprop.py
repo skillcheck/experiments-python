@@ -1,3 +1,7 @@
+#import PySide6
+#import PySide6.QtCore
+#from PySide6.QtCore import *
+
 import os, os.path, importlib
 import inspect
 import pkgutil
@@ -52,8 +56,15 @@ def getClassObject(obj):
   newObj = None
   attr = getattr(obj, subName)
   if inspect.isclass(attr):
-    print('Found class: '+attr.__name__)
-    exit()
+    className = obj.__name__+'.'+attr.__name__
+    print('Instantiating class: '+className)
+    #print('Globals:')
+    #pprint(globals())
+
+    #importlib.import_module(className)
+    klass = globals()[attr.__name__]
+    newObj = klass()
+    return newObj
   
   if inspect.ismodule(attr):
     try:
@@ -74,6 +85,7 @@ def main():
   while not inspect.isclass(obj):
     obj = getClassObject(obj)
 
+  print('Initiated class instance: '+obj.__name__)
 
 if __name__ == "__main__":
   main()
