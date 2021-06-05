@@ -58,10 +58,13 @@ def getClassObject(obj):
   if inspect.isclass(attr):
     className = obj.__name__+'.'+attr.__name__
     print('Instantiating class: '+className)
-    #print('Globals:')
-    #pprint(globals())
 
-    #importlib.import_module(className)
+    #temp = __import__(obj.__name__, globals={"__name__":attr.__name__})
+    #temp = __import__(obj.__name__, globals={"__name__":attr.__name__}, locals={}, level=3)
+    temp = __import__(obj.__name__, globals(), locals(), level=3)
+
+    print('Globals:')
+    pprint(globals())
     klass = globals()[attr.__name__]
     newObj = klass()
     return newObj
